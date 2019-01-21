@@ -7,6 +7,8 @@
  *     users: {
  *       <discord user id>: {
  *         name: <user name>
+ *         tag: <discriminator> (if enabled)
+ *         nick: <display name> (if enabled)
  *       }, ...
  *     },
  *
@@ -101,12 +103,20 @@ class SAVEFILE{
     return parsedObj && typeof parsedObj.meta === "object" && typeof parsedObj.data === "object";
   }
   
-  findOrRegisterUser(userId, userName){
+  findOrRegisterUser(userId, userName, discriminator, nick){
     if (!(userId in this.meta.users)){
       this.meta.users[userId] = {
         "name": userName
       };
-      
+
+      if (SETTINGS.metaDiscrim) {
+        this.meta.users[userId]['tag'] = discriminator;
+      };   
+
+      if (SETTINGS.metaDisplay) {
+        this.meta.users[userId]['nick'] = nick;
+      };      
+
       this.meta.userindex.push(userId);
       return this.tmp.userlookup[userId] = this.meta.userindex.length-1;
     }
@@ -163,7 +173,7 @@ class SAVEFILE{
   
   convertToMessageObject(discordMessage){
     var obj = {
-      u: this.findOrRegisterUser(discordMessage.author.id, discordMessage.author.username),
+      u: this.findOrRegisterUser(discordMessage.author.id, discordMessage.author.username, discordMessage.author['discriminator'], discordMessage['nick']),
       t: +discordMessage.timestamp.toDate(),
       m: discordMessage.content
     };
