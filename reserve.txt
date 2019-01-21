@@ -4,6 +4,10 @@ afterFirstMsg
 _afterFirstMsg
 afterSavedMsg
 _afterSavedMsg
+metaDiscrim
+_metaDiscrim
+metaDisplay
+_metaDisplay
 enableImagePreviews
 _enableImagePreviews
 enableFormatting
@@ -26,6 +30,8 @@ d
 author
 id
 username
+discriminator
+nick
 timestamp
 content
 editedTimestamp
