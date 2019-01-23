@@ -7,7 +7,6 @@ import sys
 import os
 import distutils.dir_util
 
-
 EXEC_UGLIFYJS_WIN = "{2}/lib/uglifyjs.cmd --parse bare_returns --compress --mangle toplevel --mangle-props keep_quoted,reserved=[{3}] --output \"{1}\" \"{0}\""
 EXEC_UGLIFYJS_AUTO = "uglifyjs --parse bare_returns --compress --mangle toplevel --mangle-props keep_quoted,reserved=[{3}] --output \"{1}\" \"{0}\""
 EXEC_YUI = "java -jar lib/yuicompressor-2.4.8.jar --charset utf-8 --line-break 160 --type css -o \"{1}\" \"{0}\""
